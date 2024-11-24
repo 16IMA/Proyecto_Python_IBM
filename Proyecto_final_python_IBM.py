@@ -1,6 +1,7 @@
 #CREACIÓN DE CLASES
 
 class Producto():
+
 # Declaración de atributos
     def __init__(self, nombre, categoria, precio, cantidad): 
     self.nombre= nombre 
@@ -8,15 +9,7 @@ class Producto():
     self.precio= precio
     self.cantidad= cantidad
 
-class Invetario():
-# Declaración de atributos
-
-    nombre= Producto.nombre 
-    categoria= Producto.categoria
-    precio= Producto.precio
-    cantidad= Producto.cantidad
-
-
+class Invetario(Producto):
 
 # Declaración de metodos
 
@@ -25,7 +18,9 @@ class Invetario():
         #verificar que no existe este producto
         categoria = input("Ingrese la categoría del producto: ")
         precio = int(input("Ingrese el precio del producto: "))
+        #El precio debe ser siempre mayor que 0.
         cantidad = int(input("Ingrese la cantidad del producto: "))
+        #La cantidad debe ser mayor o igual que 0.
         producto1 = Producto(nombre, categoria, precio,)
 print("Producto agregado correctamente.") #comprobar que ha introducido todo
 
@@ -87,11 +82,8 @@ print("Producto agregado correctamente.") #comprobar que ha introducido todo
 
 
 
-    def __init__(self):
-        self.lista_productos=[]
 
-    def agregar_producto(self, producto):
-        self.lista_productos.append(producto) #INVESTIGAR COMO FUNCIONA LA AUTOMATIZACIÓN DE RELLENAR OBJETOS Y APLICAR EL INVENTARIO 
+
 
 i=0
 while i==0:
@@ -106,7 +98,10 @@ while i==0:
 
   
 
+
+
    if option==1:
+        Inventario.agregaProducto()
         nombre = input("Ingrese el nombre del producto: ")
         #verificar que no existe este producto
         categoria = input("Ingrese la categoría del producto: ")
