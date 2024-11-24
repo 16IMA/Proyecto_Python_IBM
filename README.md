@@ -10,7 +10,7 @@ Requisitos:
 1. Clases y Objetos:
 o Implementar una clase Producto con los siguientes atributos:
 ▪ nombre: El nombre del producto.
-▪ categoria: La categoría a la que pertenece el producto.
+▪ categoría: La categoría a la que pertenece el producto.
 ▪ precio: El precio del producto (debe ser mayor que 0).
 ▪ cantidad: La cantidad en stock (debe ser mayor o igual que 0).
 o Implementar una clase Inventario que maneje una lista de
