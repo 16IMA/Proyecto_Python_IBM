@@ -42,31 +42,54 @@ class Inventario():
     
 #Método actualizar productos
 
-def agregarProducto(self, producto):
-        for prod in self.productos:
-            if prod.nombre == producto.nombre:
-                print(f"Error: El producto '{producto.nombre}' ya existe en el inventario.")
-                return  
-        
-        
-        self.productos.append(producto)
-        print(f"Producto '{producto.nombre}' agregado correctamente.")
+def actualizarProducto(self, nombre_producto, nuevo_precio, nueva_cantidad):
+        for producto in self.productos:
+            if producto.nombre == nombre_producto:
+                print(f"Producto encontrado: {producto.nombre}")
+                print("1. Actualizar precio")
+                print("2. Actualizar cantidad")
+                opcion = input("Seleccione qué desea actualizar: ")
+
+                if opcion == "1":
+                    try:
+                        nuevo_precio = float(input(f"Ingrese el nuevo precio (actual: {producto.precio}): "))
+                        producto.precio = nuevo_precio
+                        print(f"Precio actualizado correctamente a {producto.precio}.")
+                    except ValueError:
+                        print("Error: Debe ingresar un valor numérico para el precio.")
+                elif opcion == "2":
+                    try:
+                        nueva_cantidad = int(input(f"Ingrese la nueva cantidad (actual: {producto.cantidad}): "))
+                        producto.cantidad = nueva_cantidad
+                        print(f"Cantidad actualizada correctamente a {producto.cantidad}.")
+                    except ValueError:
+                        print("Error: Debe ingresar un valor numérico para la cantidad.")
+                else:
+                    print("Opción inválida.")
+                return
+        print(f"Producto '{nombre_producto}' no encontrado.")
+
 
 #Método buscar productos
 
     def buscarProducto(self, nombre_producto):
-         for producto in self.productos:
+        for producto in self.productos:
               if producto == nombre_producto:
-                   return print(f"Nombre del producto: {producto.nombre}, categoría: {producto.categoria}, precio: {producto.precio}, cantidad: {producto.cantidad}")
-              else:
-                    return print("Producto inexistente")
+                   print(
+                    f"Nombre: {producto.nombre}, Categoría: {producto.categoria}, "
+                    f"Precio: {producto.precio}, Cantidad: {producto.cantidad}"
+                )
+                return
+        print(f"No se encontró un producto con el nombre '{nombre_producto}'.")
 
 #Método mostrar Inventario
     
     def mostrarInventario(self):
          for producto in self.productos:
               print(f"Nombre del producto: {producto.nombre}, categoría: {producto.categoria}, precio: {producto.precio}, cantidad: {producto.cantidad}")
-              
+
+
+#Programa principal
 
 inventario = Inventario()
 
@@ -91,8 +114,10 @@ while True:
         nuevo_producto = Producto(nombre, categoria, precio, cantidad)
         inventario.agregarProducto(nuevo_producto)
         
-    #elif option==2: 
-
+    elif option==2: 
+        nombre_producto = input("Ingrese el nombre del producto que desea actualizar: ").upper()
+        actualizarProducto(nombre_producto, nuevo_precio, nueva_cantidad)
+       
     elif option==3:
         nombre_producto= input("Ingrese el nombre del producto que desea eliminar: ").upper()
         inventario.eliminarProducto(nombre_producto)
