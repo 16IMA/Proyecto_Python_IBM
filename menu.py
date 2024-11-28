@@ -3,47 +3,52 @@ class Producto():
 #Constructor de clase
 
     def __init__(self, nombre, categoria, precio, cantidad):
+        
+        self.nombre = nombre  
+        self.categoria = categoria  
+        self.precio = precio  
+        self.cantidad = cantidad  
 
-# Declaración de validaciones
+#Incorporamos Getters y setters
 
-        assert isinstance(nombre, str), "El nombre debe ser un texto."
-        assert isinstance(categoria, str), "La categoría debe ser un texto."
-        assert precio > 0, "El precio no puede ser menor a 0."
-        assert cantidad >= 0, "La cantidad no puede ser menor a 0."
-
-# Declaración de atributos 
-
-        self.__nombre= nombre.upper()
-        self.__categoria= categoria.upper()
-        self.__precio= precio
-        self.__cantidad= cantidad
-
-# Declaración de getters y setters
-
-#Los getter nos permiten buscar los atributos encapsulados
     @property
     def nombre(self):
         return self.__nombre
+
+    @nombre.setter
+    def nombre(self, nombre):
+        if not isinstance(nombre, str):
+            raise ValueError("El nombre debe ser un texto.")
+        self.__nombre = nombre.upper()
+
     @property
     def categoria(self):
         return self.__categoria
+
+    @categoria.setter
+    def categoria(self, categoria):
+        if not isinstance(categoria, str):
+            raise ValueError("La categoría debe ser un texto.")
+        self.__categoria = categoria.upper()
+
     @property
     def precio(self):
         return self.__precio
+
+    @precio.setter
+    def precio(self, precio):
+        if not isinstance(precio, (int, float)) or precio <= 0:
+            raise ValueError("El precio debe ser un número mayor a 0.")
+        self.__precio = precio
+
     @property
     def cantidad(self):
         return self.__cantidad
 
-#Los setter nos permiten modificar los atributos encapsulados
-
-    @precio.setter
-    def precio(self, precio):
-        assert precio > 0, "El precio no puede ser menor a 0."
-        self.__precio = precio
-    
-    @cantidad.setter 
+    @cantidad.setter
     def cantidad(self, cantidad):
-        assert cantidad >= 0 , "La cantidad no puede ser menor a 0."
+        if not isinstance(cantidad, int) or cantidad < 0:
+            raise ValueError("La cantidad debe ser un número entero mayor o igual a 0.")
         self.__cantidad = cantidad
 
 class Inventario():
@@ -55,7 +60,7 @@ class Inventario():
     def __init__(self):
         self.productos = []
 
-# Declaración de metodos
+#1Declaración de metodos
 
 #Método agregar productos
     
@@ -75,9 +80,9 @@ class Inventario():
         for producto in self.productos:
               if producto.nombre == nombre_producto: #Busca el producto por el nombre en la lista del inventario para poder eliminarlo de la lista del inventario
                     self.productos.remove(producto)
-                    return print("Producto eliminado")
-              else:
-                    return print("Producto inexistente")
+                    print("Producto eliminado")
+                    return
+        print("Producto inexistente")
 
 #Método actualizar productos
 
@@ -99,6 +104,7 @@ class Inventario():
                                     return
                                 except ValueError:
                                     print("Error: Debe ingresar un valor numérico para el precio. Inténtelo de nuevo.")
+                                    continue
                         elif opcion == 2:
                             while True: #Bucle para asegurarse de manejar entradas inválidas
                                 try:
@@ -108,6 +114,7 @@ class Inventario():
                                     return
                                 except ValueError:
                                     print("Error: Debe ingresar un valor numérico para la cantidad. Inténtelo de nuevo.")
+                                    continue
                         else:
                             print("Opción inválida. Inténtelo nuevamente.")
                     except ValueError:
